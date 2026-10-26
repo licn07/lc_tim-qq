@@ -1,8 +1,8 @@
 {
-  "versionCode": 206,
-  "versionName": "2026.10.25",
+  "versionCode": 209,
+  "versionName": "2026.10.26",
   "minVersionCode": 0,
-  "changelog": "1. 修复荣耀机型闪退\n2. 新增更新检测\n3. 液态玻璃降级开关",
+  "changelog": "1. 修复检测完成后卡顿抽搐\n2. 主界面卡片改为逐个飞入，过渡更顺\n3. 背景图应用内固定，不再来回跳\n4. 更新检测超时放宽到 9 秒，弱网不再误报\n5. 校验通过后 7 天内免联网",
   "downloads": [
     { "name": "移动云盘", "url": "https://yun.139.com/shareweb/#/w/i/2rJV7GtJAta1c/*p90JUKLVJRVm:/" },
     { "name": "迅雷云盘", "url": "https://pan.xunlei.com/s/VOjfAF-1eQp0GgVEkeNvvICAA1?pwd=ngqb#" }
