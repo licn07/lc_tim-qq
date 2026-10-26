@@ -4,7 +4,53 @@
 >
 > 作者：**Lc** · 界面：液态玻璃 · 分发：粉丝群，非商用上架
 >
-> 工程有两个同构变体，源码逐字一致，仅包名不同：**TIM 版**（`com.tencent.tim`）/ **QQ 版**（`com.tencent.mobileqq`）。
+> 工程有两个同构变体，源码逐字一致，仅包名不同：**TIM 版**（`com.tencent.tim`）/ **QQ 版**（`com.tencent.mobileqq`）。到底该装哪个，见下方「[两个版本怎么选](#两个版本怎么选)」。
+
+---
+
+## 两个版本怎么选
+
+仓库每次发版放两个 APK，**功能完全一样，代码一模一样，只有安装包名不同**。
+选哪个，只看你的手机上还要不要留着官方 QQ 正常用。
+
+| | **TIM 版** | **QQ 版** |
+|---|---|---|
+| APK 文件名 | `免root隐藏QQ版本_<版本号>.apk` | `卸载QQ使用版本_<版本号>.apk` |
+| 安装包名 | `com.tencent.tim` | `com.tencent.mobileqq` |
+| 占用了谁的包名 | 官方 **TIM**（手机上极少有人装） | 官方 **QQ** |
+| 装之前要不要卸载官方 QQ | **不用**，直接装 | **必须卸载**，否则装不上 |
+| 主界面「QQ」分组 | 显示 | 隐藏 |
+| 内置「伪装卸载 QQ / 一键恢复」 | 有 | 无 |
+| 怎么处理官方 QQ | 用软件里的开关临时隐藏，随时一键还原（数据不丢） | 已经不存在了，没什么可处理 |
+
+### 三种情况直接对号入座
+
+**① 这台手机我还得正常聊 QQ**
+→ 装 **TIM 版**（`免root隐藏QQ版本`）。
+官方 QQ 原地不动。要上号时进主界面「QQ」分组点「伪装卸载 QQ」，软件通过 Root 的 `pm hide` 或 Shizuku 的 `pm uninstall -k --user 0` 把 QQ 藏起来，登录聊天记录全保留；用完点「一键恢复」原样回来。
+
+**② 这是专门的跑号机，手机上不需要 QQ**
+→ 装 **QQ 版**（`卸载QQ使用版本`）。
+它自己就顶着 `com.tencent.mobileqq` 这个包名，官方 QQ 装不上也不会碍事，省掉每次手动隐藏的步骤。
+
+**③ 我在软件里上号，但不想动官方 QQ 一个字节**
+→ 还是 **TIM 版**，但别点「伪装卸载 QQ」，只做上号。隐藏只是可选动作，不是必须步骤。
+
+### 两个都装行不行
+
+技术上可以（包名不同、签名相同），但**不建议**：
+两个版本共用同一份数据目录 `/storage/emulated/0/1LICN/数据号/` 和同一份日志、同一份账号文件，同时开着会互相抢写入，排查问题时日志也混在一起分不清。
+
+### 别搞错的三件事
+
+1. **官方 TIM 也装不了** —— TIM 版占着 `com.tencent.tim`。虽然用 TIM 的人少，但手机上如果本来有 TIM，得先卸掉。
+2. **换版本要重装** —— 两个包名不同，从 TIM 版换到 QQ 版不是覆盖升级，是重新安装。账号数据在 `/1LICN/数据号/` 里，不受影响。
+3. **升级必须同签名** —— 两个包都是同一把 keystore 签的，所以 TIM 版 → TIM 版、QQ 版 → QQ 版之间可以直接覆盖安装，不用卸载。
+
+### 主界面那个「QQ」分组为什么有时不出现
+
+软件会拿 `getPackageName()` 和自己比：不是 `com.tencent.tim` 就把「QQ」整组连同「伪装卸载 QQ / 一键恢复」按钮一起 `GONE`。
+因为 QQ 版自己就占着 QQ 的包名，没有"再隐藏一次"的余地 —— 隐藏自己等于把自己干掉。所以那一组在 QQ 版里按设计就是隐藏的，不是坏了。
 
 ---
 
@@ -78,7 +124,7 @@ SplashGateActivity（启动闸门）
    │  ① 显示背景（自定义图 / 内置图 / 光晕）
    │  ② 蓝色缺口圆环旋转 +「正在检测更新，请稍等」
    │
-   ├─ 检测通过 → 圆环变对勾 → 直连主界面
+   ├─ 检测通过 → 圆环停止 → 内容层淡出放大「推远消失」→ 直连主界面
    │
    └─ 检测未通过（断网 / JSON 异常）→ 红叉失败页
             │  明确写出原因
@@ -98,13 +144,19 @@ SplashGateActivity（启动闸门）
 ```
 APP 启动 ──GET──> GitHub 仓库根目录的 version.json
                       │
-                      ├─ 三个源并发竞速，谁先成功用谁
-                      │    ghproxy.net（反代，兜底）
-                      │    raw.githubusercontent.com
-                      │    cdn.jsdelivr.net
+                      ├─ 五个源并发竞速，谁先成功用谁
+                      │    ① cdn.jsdmirror.com        （国内可用）
+                      │    ② gh-proxy.com             （国内可用）
+                      │    ③ ghproxy.net              （反代，兜底）
+                      │    ④ raw.githubusercontent.com
+                      │    ⑤ cdn.jsdelivr.net
                       │
                       └─ 全部失败 → 读本地缓存 → 再失败才算检测未通过
 ```
+
+单源超时 8 秒，整轮预算 13 秒。前两个是国内镜像，因为 GitHub 的官方域名在国内基本全线阻断（raw 被 DNS 污染、jsDelivr 连接重置），加上它们之后华为/荣耀这类机型才不再误报「没网」。
+
+校验通过后写 `update_pass.flag`，7 天内不再联网检测；**只有真实联网拿到 JSON 才刷新这个时间戳**，走本地缓存放行不续期。
 
 ### 更新卡片
 
@@ -121,13 +173,13 @@ APP 启动 ──GET──> GitHub 仓库根目录的 version.json
 
 ```json
 {
-  "versionCode": 207,
-  "versionName": "2026.10.18",
+  "versionCode": 211,
+  "versionName": "2026.10.26",
   "minVersionCode": 0,
   "changelog": "1. 修复闪屏\n2. 优化启动动画",
   "downloads": [
-    { "name": "移动云盘", "url": "https://yun.139.com/..." },
-    { "name": "迅雷云盘", "url": "https://pan.xunlei.com/..." }
+    { "name": "移动云盘（TIM 版）", "url": "https://yun.139.com/..." },
+    { "name": "移动云盘（QQ 版）", "url": "https://yun.139.com/..." }
   ],
   "size": 0,
   "md5": ""
@@ -147,10 +199,12 @@ APP 启动 ──GET──> GitHub 仓库根目录的 version.json
 
 ### 发版流程
 
-1. 改 `versionCode +1`、`versionName` 改成当天日期
-2. 编译 APK，传网盘，拿分享链接
-3. 编辑 `version.json`：版本号 / changelog / 网盘链接
+1. 改 `versionCode +1`、`versionName` 改成当天日期（两个工程都要改）
+2. 编译两个 APK，按 `免root隐藏QQ版本_<版本号>.apk` / `卸载QQ使用版本_<版本号>.apk` 命名，传网盘，拿分享链接
+3. 编辑 `version.json`：版本号 / changelog / 两个网盘链接放进 `downloads`
 4. commit + push
+
+`downloads` 里请**把两个版本都列出来，名字里标明「TIM 版 / QQ 版」**，否则用户不知道该下哪个。
 
 `raw.githubusercontent` 推送即生效；jsDelivr 有约 12 小时 CDN 缓存（代码里带时间戳破缓存）。
 
@@ -232,10 +286,18 @@ com/tencent/open/agent/
 
 **原因**：液态玻璃依赖的 `RenderEffect` / `RuntimeShader`(AGSL) / `RenderNode` 在个别 GPU 上会在 native 层直接崩进程 —— 不产生 Java 异常，所以崩溃捕获抓不到。
 
-**处理**：内置 `GlassSafeMode`，默认**开启安全模式**（关闭全部 GPU 特效，只保留基础渲染色）。另外做了自愈机制：
+**处理**：内置 `GlassSafeMode`，按机型能力给默认值 ——
 
-- 用 SharedPreferences 记 `started` / `ui_alive`
-- 上次启动开了头却没活到首帧 → 本次自动强制降级
+- **Android 13（SDK 33）及以上**默认**完整特效**，这些机型 RuntimeShader/AGSL 齐全，一刀切降级只会让好硬件跑得丑
+- **Android 12 及以下**默认**安全模式**，老 GPU 后端缺失，强开会在 native 层崩
+- 用户手动切换过一次后，以用户的选择为准，不会被默认值覆盖
+
+自愈机制（只在真崩时才降级）：
+
+- 用 SharedPreferences 记 `stage_began` / `ui_alive`
+- 探测窗口收窄到「**真的开始创建玻璃视图** → 首帧活下来」这一段（`enterGlassStage()`）
+- 启动闸门页、引导页本来就不用玻璃特效，**不参与判定** —— 在闸门页遇到断网、划掉进程、走引导流程都不会被判成崩溃
+- 只有「上次进了玻璃阶段却没活到首帧」才强制降级
 
 **手动切换**：长按主界面右上角感叹号 → 开发者测试面板 → 玻璃特效降级开关 → 立即重启界面。
 
@@ -253,9 +315,16 @@ com/tencent/open/agent/
 
 | 文件 | 内容 |
 |---|---|
-| `/storage/emulated/0/1LICN/启动日志.txt` | 每次启动的完整过程、结论、`[trace]` 打点 |
-| `/storage/emulated/0/1LICN/crash_log.txt` | Java 未捕获异常堆栈 |
-| `/storage/emulated/0/1LICN/shizuku_debug.log` | 提权通道执行记录 |
+| `/storage/emulated/0/1LICN/数据号/上号器日志/启动日志.txt` | 每次启动的完整过程、结论、`[trace]` 打点、各更新源实测结果 |
+| `/storage/emulated/0/1LICN/数据号/上号器日志/crash_log.txt` | Java 未捕获异常堆栈 |
+| `/storage/emulated/0/1LICN/数据号/上号器日志/shizuku_debug.log` | 提权通道执行记录 |
+| `/storage/emulated/0/1LICN/数据号/上号器日志/update_pass.flag` | 7 天免检标志（空文件，mtime 即通过时刻） |
+| `/storage/emulated/0/1LICN/数据号/上号器日志/调试模式` | 存在则显示调试面板（手动建空文件） |
+| `/storage/emulated/0/1LICN/数据号/上号器日志/bg_cache/` | 内置背景图缓存 |
+
+软件自己产出的文件全部收纳在 `数据号/上号器日志/` 下，`/1LICN/` 根目录不再有散落文件。
+
+老版本（≤209）升级上来时会自动搬迁一次：`启动日志.txt`、`crash_log.txt`、`shizuku_debug.log`、`update_pass.flag`、`数据耗/调试模式`、`bg_cache/` 六项挪进新目录，其它文件一律不动。搬迁用 `renameTo` 保留 mtime，所以 `update_pass.flag` 的 7 天计时不会被刷新。目标位置已存在同名文件时不覆盖。
 
 启动日志里的 `[trace]` 是无条件写入的，即使启动结论已经落盘也会继续追加。它的用途是定位「进程在 onCreate 之后凭空消失」这类非 Java 层崩溃 —— 有几个 trace，就证明活到了哪一步。
 
