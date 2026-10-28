@@ -2,7 +2,7 @@
   "versionCode": 211,
   "versionName": "2026.10.26",
   "minVersionCode": 0,
-  "changelog": "1. 更新检测改用国内镜像，华为/荣耀机型不再误报没网\n2. 修复支持全部特效的机型被误判降级（Android 13 以上默认完整特效）\n3. 日志统一收纳到 /1LICN/数据号/上号器日志/，老版本升级自动搬迁\n4. 底部提示改为卡片，跟随界面透明度一起调节",
+  "changelog": "1. 更新检测改用国内镜像，华为/荣耀机型不再误报没网\n2. 修复支持全部特效的机型被误判降级液态玻璃特效\n3. 日志统一收纳到 /1LICN/数据号/上号器日志/，老版本升级自动搬迁\n4. 底部提示改为卡片，跟随界面透明度一起调节",
   "downloads": [
     { "name": "移动云盘（不限速·推荐）", "url": "https://yun.139.com/shareweb/#/w/i/2rJV7GtJAta1c/*p90JUKLVJRVm:/" },
     { "name": "迅雷云盘", "url": "https://pan.xunlei.com/s/VOjfAF-1eQp0GgVEkeNvvICAA1?pwd=ngqb#" }
