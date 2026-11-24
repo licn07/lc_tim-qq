@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Lc 登录管理工具（Lc 上号器）项目介绍、下载、Root / Shizuku 激活教程与常见问题。">
+<title>Lc 登录管理工具 · 项目介绍与使用教程</title>
+<style>
+/* ============================================================
+   暖白偏棕 · 双主题
+   浅色：纸感暖白
+   深色：低蓝光暖棕灰，非纯黑，减少夜间视觉疲劳
+   ============================================================ */
+
+:root{
+  /* ---- 浅色 ---- */
+  --bg:#faf6ef;
+  --card:#fffdf8;
+  --card2:#f7f0e5;
+  --line:#e6d9c7;
+  --line2:#d9c8b2;
+
+  --txt:#3b2f26;
+  --txt2:#5c4b3d;
+  --sub:#94806c;
+
+  --brown:#8c5e3c;
+  --brown2:#a97a52;
+  --brown3:#6d452a;
+  --olive:#6b7f4a;
+  --red:#b0503e;
+  --amber:#c08a3e;
+
+  --btn-bg:linear-gradient(140deg,#a97a52,#7d5232 88%);
+  --btn-fg:#fdf7ef;
+  --btn-shadow:0 8px 22px rgba(125,82,50,.26);
+  --btn-shadow-hover:0 13px 30px rgba(125,82,50,.34);
+  --btn-inset:inset 0 1px 0 rgba(255,255,255,.16);
+
+  --alt-bg:linear-gradient(140deg,#f3e9db,#e8d9c4);
+  --alt-fg:#6d452a;
+  --alt-shadow:0 6px 18px rgba(140,94,60,.12);
+  --alt-shadow-hover:0 10px 26px rgba(140,94,60,.18);
+
+  --logo-bg:linear-gradient(150deg,#a97a52,#6d452a 78%);
+  --logo-fg:#fdf6ec;
+  --logo-shadow:0 16px 40px rgba(109,69,42,.28),inset 0 1px 0 rgba(255,255,255,.22);
+
+  --shadow:0 1px 2px rgba(140,94,60,.05),0 4px 16px rgba(140,94,60,.07);
+  --shadow-hover:0 2px 6px rgba(140,94,60,.09),0 10px 32px rgba(140,94,60,.12);
+
+  --g1:rgba(214,180,140,.34);
+  --g2:rgba(190,210,170,.22);
+  --g3:rgba(220,195,160,.26);
+
+  --th-bg:rgba(169,122,82,.06);
+  --row-hover:rgba(169,122,82,.035);
+  --code-bg:rgba(169,122,82,.13);
+  --code-bd:rgba(169,122,82,.16);
+  --note-bg:rgba(169,122,82,.08);
+  --warn-bg:rgba(192,138,62,.10);
+  --danger-bg:rgba(176,80,62,.09);
+  --badge-on-bg:rgba(107,127,74,.09);
+  --badge-on-bd:rgba(107,127,74,.42);
+  --tag-bg:rgba(169,122,82,.17);
+  --tag-g-bg:rgba(107,127,74,.15);
+
+  --dl-row:rgba(169,122,82,.055);
+  --dl-row-hover:rgba(169,122,82,.11);
+  --qq-bg:linear-gradient(140deg,#3f7fd6,#2b5fa8 88%);
+  --qq-fg:#f4f8ff;
+  --qq-shadow:0 6px 18px rgba(43,95,168,.24);
+  --qq-shadow-hover:0 10px 26px rgba(43,95,168,.34);
+}
+
+/* ---- 深色：暖棕灰 ---- */
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1a1613;
+    --card:#231e19;
+    --card2:#2b2520;
+    --line:#3a322a;
+    --line2:#4a4036;
+
+    --txt:#e8e0d6;
+    --txt2:#c4b8a8;
+    --sub:#9a8d7d;
+
+    --brown:#c9a077;
+    --brown2:#d4ac82;
+    --brown3:#e0c4a3;
+    --olive:#9db073;
+    --red:#e08573;
+    --amber:#dba85c;
+
+    --btn-bg:linear-gradient(140deg,#8a5f3d,#6b4528 88%);
+    --btn-fg:#f7efe4;
+    --btn-shadow:0 8px 22px rgba(0,0,0,.38);
+    --btn-shadow-hover:0 13px 30px rgba(0,0,0,.5);
+    --btn-inset:inset 0 1px 0 rgba(255,255,255,.10);
+
+    --alt-bg:linear-gradient(140deg,#332b24,#2a231d);
+    --alt-fg:#e0c4a3;
+    --alt-shadow:0 6px 18px rgba(0,0,0,.3);
+    --alt-shadow-hover:0 10px 26px rgba(0,0,0,.42);
+
+    --logo-bg:linear-gradient(150deg,#8a5f3d,#5a3820 78%);
+    --logo-fg:#f7efe4;
+    --logo-shadow:0 16px 40px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.12);
+
+    --shadow:0 1px 2px rgba(0,0,0,.24),0 4px 16px rgba(0,0,0,.28);
+    --shadow-hover:0 2px 6px rgba(0,0,0,.3),0 10px 32px rgba(0,0,0,.4);
+
+    --g1:rgba(120,85,55,.20);
+    --g2:rgba(90,105,70,.13);
+    --g3:rgba(110,90,70,.16);
+
+    --th-bg:rgba(212,172,130,.07);
+    --row-hover:rgba(212,172,130,.05);
+    --code-bg:rgba(212,172,130,.12);
+    --code-bd:rgba(212,172,130,.18);
+    --note-bg:rgba(212,172,130,.09);
+    --warn-bg:rgba(219,168,92,.11);
+    --danger-bg:rgba(224,133,115,.11);
+    --badge-on-bg:rgba(157,176,115,.13);
+    --badge-on-bd:rgba(157,176,115,.42);
+    --tag-bg:rgba(212,172,130,.15);
+    --tag-g-bg:rgba(157,176,115,.16);
+
+    --dl-row:rgba(212,172,130,.07);
+    --dl-row-hover:rgba(212,172,130,.13);
+    --qq-bg:linear-gradient(140deg,#2f5f9e,#24487a 88%);
+    --qq-fg:#e8f1ff;
+    --qq-shadow:0 6px 18px rgba(0,0,0,.34);
+    --qq-shadow-hover:0 10px 26px rgba(0,0,0,.46);
+  }
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--txt);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  line-height:1.78;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+  transition:background .3s ease,color .3s ease;
+}
+body::before{
+  content:"";
+  position:fixed;inset:0;z-index:-1;
+  background:
+    radial-gradient(1000px 560px at 12% -10%,var(--g1),transparent 62%),
+    radial-gradient(820px 460px at 90% 4%,var(--g2),transparent 64%),
+    radial-gradient(700px 700px at 50% 110%,var(--g3),transparent 66%);
+  pointer-events:none;
+  transition:background .3s ease;
+}
+
+.wrap{max-width:900px;margin:0 auto;padding:0 24px}
+@media(max-width:520px){.wrap{padding:0 18px}}
+
+/* ===== 顶部 ===== */
+header{padding:80px 0 44px;text-align:center}
+.logo{
+  width:90px;height:90px;margin:0 auto 22px;
+  border-radius:26px;
+  background:var(--logo-bg);
+  display:flex;align-items:center;justify-content:center;
+  font-size:34px;font-weight:800;letter-spacing:-1.5px;
+  color:var(--logo-fg);
+  box-shadow:var(--logo-shadow);
+  transition:background .3s ease,box-shadow .3s ease;
+}
+h1{
+  font-size:34px;font-weight:800;letter-spacing:-.6px;
+  margin-bottom:12px;color:var(--brown3);
+  line-height:1.3;
+}
+@media(max-width:520px){h1{font-size:27px}}
+.sub{color:var(--sub);font-size:14.5px;letter-spacing:.2px}
+.badges{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.badge{
+  font-size:12px;padding:5px 14px;border-radius:999px;
+  border:1px solid var(--line2);background:var(--card);color:var(--sub);
+  box-shadow:0 1px 3px rgba(0,0,0,.05);
+  transition:all .3s ease;
+}
+.badge.on{
+  border-color:var(--badge-on-bd);color:var(--olive);
+  background:var(--badge-on-bg);font-weight:600;
+}
+
+/* ===== 卡片 ===== */
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:28px;
+  margin-bottom:20px;
+  box-shadow:var(--shadow);
+  transition:background .3s ease,border-color .3s ease,box-shadow .3s ease;
+}
+@media(max-width:520px){.card{padding:22px 18px;border-radius:16px}}
+
+h2{
+  font-size:20px;font-weight:700;
+  margin:0 0 18px;
+  display:flex;align-items:center;gap:11px;
+  color:var(--brown3);letter-spacing:-.2px;
+  line-height:1.4;
+}
+h2 .n{
+  width:27px;height:27px;flex:0 0 27px;border-radius:9px;
+  background:var(--tag-bg);
+  color:var(--brown);border:1px solid var(--line2);
+  font-size:13px;display:flex;align-items:center;justify-content:center;
+  font-weight:700;line-height:1;
+  padding-bottom:1px;
+}
+h3{
+  font-size:15px;font-weight:700;
+  margin:24px 0 11px;
+  color:var(--brown);
+  padding-left:12px;
+  border-left:3px solid var(--brown2);
+  line-height:1.5;
+}
+h3:first-of-type{margin-top:16px}
+p{color:var(--txt2);font-size:14.5px;margin-bottom:11px}
+p:last-child{margin-bottom:0}
+
+ul{margin:10px 0 14px;padding:0;list-style:none}
+li{
+  color:var(--txt2);font-size:14.5px;
+  padding-left:20px;position:relative;
+  margin-bottom:9px;line-height:1.75;
+}
+li:last-child{margin-bottom:0}
+li::before{
+  content:"";position:absolute;
+  left:4px;top:.72em;
+  width:6px;height:6px;border-radius:50%;
+  background:var(--brown2);opacity:.7;
+}
+
+b,strong{color:var(--brown3);font-weight:700}
+code{
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+  font-size:12.5px;
+  background:var(--code-bg);
+  border:1px solid var(--code-bd);
+  padding:2px 7px;border-radius:5px;
+  color:var(--brown3);
+  word-break:break-all;
+  transition:background .3s ease,border-color .3s ease;
+}
+a{
+  color:var(--brown);text-decoration:none;
+  border-bottom:1px solid var(--line2);
+  transition:color .18s ease,border-color .18s ease;
+}
+a:hover{color:var(--brown3);border-bottom-color:var(--brown2)}
+
+/* ===== 目录 ===== */
+.toc{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.toc a{
+  font-size:12.5px;padding:7px 14px;border-radius:999px;
+  background:var(--card);border:1px solid var(--line);
+  color:var(--sub);text-decoration:none;
+  box-shadow:0 1px 3px rgba(0,0,0,.04);
+  transition:all .18s ease;
+}
+.toc a:hover{
+  border-color:var(--brown2);color:var(--brown);
+  background:var(--card2);transform:translateY(-1px);
+}
+
+/* ===== 版本条：紧凑三格 ===== */
+.ver{
+  display:grid;
+  grid-template-columns:1fr auto 1fr auto 1fr;
+  align-items:center;
+  padding:16px 20px;
+  border-radius:14px;
+  background:var(--card2);
+  border:1px solid var(--line2);
+  margin-bottom:16px;
+  transition:background .3s ease,border-color .3s ease;
+}
+@media(max-width:520px){
+  .ver{grid-template-columns:1fr;gap:0;padding:6px 16px}
+  .ver .sp{width:100%;height:1px;margin:10px 0}
+  .ver > div{padding:8px 0}
+}
+.ver .k{
+  font-size:11.5px;color:var(--sub);
+  display:block;margin-bottom:2px;letter-spacing:.3px;line-height:1.35;
+}
+.ver .v{
+  font-size:16px;font-weight:700;color:var(--brown3);
+  letter-spacing:-.2px;line-height:1.35;display:block;
+}
+.ver .sp{
+  width:1px;height:34px;background:var(--line2);
+  justify-self:center;
+}
+
+/* ===== 下载区：行式紧凑列表（替代原来两个大按钮） ===== */
+.dlgrid{display:grid;gap:10px}
+.dlrow{
+  display:grid;
+  grid-template-columns:34px 1fr auto;
+  align-items:center;
+  gap:14px;
+  padding:13px 16px;
+  border-radius:12px;
+  background:var(--dl-row);
+  border:1px solid var(--line);
+  text-decoration:none;
+  border-bottom:1px solid var(--line);
+  transition:background .18s ease,border-color .18s ease,transform .18s ease;
+}
+.dlrow:hover{
+  background:var(--dl-row-hover);
+  border-color:var(--brown2);
+  transform:translateX(2px);
+  text-decoration:none;
+}
+.dlrow .ic{
+  width:34px;height:34px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:800;
+  background:var(--tag-bg);color:var(--brown);
+  border:1px solid var(--line2);
+  line-height:1;
+  flex:0 0 34px;
+}
+.dlrow .meta{min-width:0}
+.dlrow .nm{
+  display:block;font-size:14.5px;font-weight:700;
+  color:var(--brown3);line-height:1.45;
+  margin-bottom:1px;
+}
+.dlrow .ds{
+  display:block;font-size:12px;color:var(--sub);
+  line-height:1.5;
+}
+.dlrow .go{
+  font-size:12px;color:var(--brown);
+  white-space:nowrap;flex:0 0 auto;
+  padding:4px 11px;border-radius:8px;
+  background:var(--tag-bg);
+  border:1px solid var(--line2);
+  font-weight:600;line-height:1.5;
+}
+@media(max-width:520px){
+  .dlrow{grid-template-columns:30px 1fr;gap:11px;padding:12px 13px}
+  .dlrow .ic{width:30px;height:30px;flex:0 0 30px;font-size:13px;border-radius:9px}
+  .dlrow .go{display:none}
+  .dlrow .nm{font-size:14px}
+}
+
+/* ===== 两版对比 ===== */
+.two{display:grid;gap:14px;grid-template-columns:1fr 1fr;margin-top:6px;align-items:stretch}
+@media(max-width:640px){.two{grid-template-columns:1fr}}
+.vbox{
+  background:var(--card2);border:1px solid var(--line);
+  border-radius:14px;padding:20px;
+  display:flex;flex-direction:column;
+  transition:background .3s ease,border-color .3s ease;
+}
+.vbox.hi{
+  border-color:var(--line2);
+  background:var(--card2);
+}
+.vbox .tag{
+  display:inline-flex;align-items:center;
+  align-self:flex-start;
+  font-size:11px;padding:3px 10px;border-radius:7px;
+  background:var(--tag-bg);color:var(--brown);
+  margin-bottom:11px;font-weight:600;letter-spacing:.2px;
+  line-height:1.6;
+}
+.vbox .tag.g{background:var(--tag-g-bg);color:var(--olive)}
+.vbox h4{
+  font-size:15px;margin:0 0 10px;
+  color:var(--brown3);font-weight:700;line-height:1.45;
+}
+.vbox p{font-size:13px;margin-bottom:8px;color:var(--txt2);line-height:1.72}
+.vbox p:last-child{margin-bottom:0}
+
+/* ===== 步骤 ===== */
+.step{display:flex;gap:15px;margin-bottom:20px}
+.step:last-child{margin-bottom:0}
+.step .idx{
+  flex:0 0 30px;width:30px;height:30px;border-radius:50%;
+  background:var(--tag-bg);
+  border:1px solid var(--line2);
+  color:var(--brown);font-size:13px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  line-height:1;
+  margin-top:3px;
+  transition:background .3s ease,border-color .3s ease;
+}
+.step .body{flex:1;min-width:0}
+.step .body h4{
+  font-size:14.5px;color:var(--brown3);
+  margin:0 0 6px;font-weight:700;line-height:1.5;
+}
+.step .body p{font-size:13.5px;margin-bottom:6px;line-height:1.72}
+.step .body p:last-child{margin-bottom:0}
+
+/* ===== 提示框 ===== */
+.note{
+  border-left:3px solid var(--brown2);
+  background:var(--note-bg);
+  padding:13px 16px;
+  border-radius:0 10px 10px 0;
+  font-size:13.5px;color:var(--txt2);
+  margin:14px 0;line-height:1.75;
+  transition:background .3s ease,border-color .3s ease;
+}
+.note.warn{border-left-color:var(--amber);background:var(--warn-bg)}
+.note.danger{border-left-color:var(--red);background:var(--danger-bg)}
+.note b{color:var(--brown3)}
+.note:last-child{margin-bottom:0}
+
+/* ===== 表格 ===== */
+.tbl{
+  width:100%;border-collapse:collapse;
+  margin:12px 0 10px;font-size:13.5px;
+  table-layout:fixed;
+}
+.tbl th,.tbl td{
+  text-align:left;
+  padding:11px 13px;
+  border-bottom:1px solid var(--line);
+  vertical-align:top;
+  line-height:1.7;
+  word-break:break-word;
+}
+.tbl th{
+  color:var(--sub);font-weight:600;font-size:12px;
+  background:var(--th-bg);
+  white-space:nowrap;
+}
+.tbl th:first-child{width:96px}
+@media(max-width:520px){
+  .tbl th:first-child{width:78px}
+  .tbl th,.tbl td{padding:10px 9px;font-size:13px}
+}
+.tbl td{color:var(--txt2)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl td:first-child{color:var(--brown3);font-weight:600;white-space:nowrap}
+.tbl tr:hover td{background:var(--row-hover)}
+
+/* ===== FAQ ===== */
+details{
+  background:var(--card2);border:1px solid var(--line);
+  border-radius:12px;padding:15px 17px;margin-bottom:11px;
+  transition:border-color .18s ease,box-shadow .18s ease,background .3s ease;
+}
+details[open]{
+  border-color:var(--line2);
+  box-shadow:var(--shadow);
+  background:var(--card);
+}
+summary{
+  cursor:pointer;font-size:14px;font-weight:600;
+  color:var(--brown3);list-style:none;
+  display:flex;justify-content:space-between;align-items:center;
+  gap:12px;line-height:1.6;
+  outline:none;
+}
+summary:focus-visible{
+  outline:2px solid var(--brown2);
+  outline-offset:3px;
+  border-radius:6px;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{
+  content:"＋";color:var(--brown2);
+  font-size:15px;font-weight:400;
+  flex:0 0 auto;line-height:1;
+  transition:transform .2s ease,color .3s ease;
+}
+details[open] summary::after{content:"－"}
+details p{
+  margin-top:12px;margin-bottom:8px;
+  font-size:13.5px;color:var(--txt2);line-height:1.75;
+}
+details p:last-child{margin-bottom:0}
+
+/* ===== 粉丝群 ===== */
+.qqlink{
+  display:flex;align-items:center;gap:14px;
+  padding:15px 18px;border-radius:13px;
+  background:var(--qq-bg);
+  color:var(--qq-fg);text-decoration:none;
+  border-bottom:none;
+  box-shadow:var(--qq-shadow);
+  margin-bottom:11px;
+  transition:transform .18s ease,box-shadow .18s ease,background .3s ease;
+}
+.qqlink:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--qq-shadow-hover);
+  color:var(--qq-fg);
+  border-bottom:none;
+}
+.qqlink:last-child{margin-bottom:0}
+.qqlink .qic{
+  width:38px;height:38px;flex:0 0 38px;
+  border-radius:11px;
+  background:rgba(255,255,255,.16);
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:800;line-height:1;
+}
+.qqlink .qm{flex:1;min-width:0}
+.qqlink .qn{
+  display:block;font-size:14.5px;font-weight:700;
+  line-height:1.45;margin-bottom:1px;
+}
+.qqlink .qd{
+  display:block;font-size:12px;opacity:.82;line-height:1.5;
+}
+.qqlink .qarrow{
+  font-size:16px;opacity:.72;flex:0 0 auto;line-height:1;
+}
+@media(max-width:520px){
+  .qqlink{padding:13px 15px;gap:11px}
+  .qqlink .qic{width:34px;height:34px;flex:0 0 34px;border-radius:10px}
+  .qqlink .qn{font-size:14px}
+}
+
+/* ===== 页脚 ===== */
+footer{
+  text-align:center;padding:46px 0 58px;
+  border-top:1px solid var(--line);margin-top:38px;
+  transition:border-color .3s ease;
+}
+footer p{margin-bottom:6px;color:var(--sub);font-size:12.5px;line-height:1.7}
+footer p:first-child{color:var(--brown3);font-size:13.5px;font-weight:600}
+footer p:last-child{margin-top:14px;opacity:.72;font-size:12px;letter-spacing:.4px}
+
+/* ===== 无障碍 ===== */
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="logo">Lc</div>
+    <h1>Lc 登录管理工具</h1>
+    <p class="sub">安卓端账号登录管理工具 · 上号 / 抓号 / 挂机 三合一</p>
+    <div class="badges">
+      <span class="badge on">v224 最新版</span>
+      <span class="badge">Android 8.0+</span>
+      <span class="badge">免 Root 可用</span>
+      <span class="badge">完全免费</span>
+    </div>
+  </header>
+
+  <div class="toc">
+    <a href="#about">项目简介</a>
+    <a href="#version">版本与下载</a>
+    <a href="#choose">版本怎么选</a>
+    <a href="#root">Root 教程</a>
+    <a href="#shizuku">Shizuku 教程</a>
+    <a href="#usage">使用方法</a>
+    <a href="#group">粉丝群</a>
+    <a href="#faq">常见问题</a>
+    <a href="#changelog">更新日志</a>
+  </div>
+
+  <!-- ==================== 1 项目简介 ==================== -->
+  <div class="card" id="about">
+    <h2><span class="n">1</span>项目简介</h2>
+    <p>
+      Lc 登录管理工具是一款安卓端的账号登录管理工具，主要用来管理游戏账号的上号、抓号与挂机。
+      核心能力是<b>伪装卸载 QQ</b>：把手机上的 QQ 临时隐藏起来，让游戏调起本工具完成登录，
+      全程<b>不删除任何聊天记录与登录状态</b>，随时可以一键恢复。
+    </p>
+    <h3>主要功能</h3>
+    <ul>
+      <li><b>上号</b> — 选择已保存的账号数据，直接登录游戏</li>
+      <li><b>抓号</b> — 捕获游戏登录过程中产生的账号数据，自动保存归档</li>
+      <li><b>挂机</b> — 保持登录状态，适合长时间在线场景</li>
+      <li><b>伪装卸载 QQ</b> — 真卸载但完整保留数据，恢复时后台静默安装</li>
+      <li><b>数据管理</b> — 账号文件按游戏分类存放，可查看、编辑、去重</li>
+      <li><b>号况验证</b> — 批量检查账号是否可用</li>
+    </ul>
+    <div class="note">
+      <b>免费说明：</b>本工具从做出来到现在一直免费，没有广告、没有会员、没有次数限制。
+      唯一的要求是进粉丝群拿一个使用口令。觉得好用的话，帮忙推荐给需要的人就是最大的支持。
+    </div>
+  </div>
+
+  <!-- ==================== 2 版本与下载 ==================== -->
+  <div class="card" id="version">
+    <h2><span class="n">2</span>版本与下载</h2>
+
+    <div class="ver">
+      <div>
+        <span class="k">当前版本</span>
+        <span class="v">v224</span>
+      </div>
+      <div class="sp"></div>
+      <div>
+        <span class="k">发布日期</span>
+        <span class="v">2026.11.16</span>
+      </div>
+      <div class="sp"></div>
+      <div>
+        <span class="k">安装包体积</span>
+        <span class="v">约 409 KB</span>
+      </div>
+    </div>
+
+    <div class="dlgrid">
+      <a class="dlrow" href="https://yun.139.com/shareweb/#/w/i/2rJV7GtJw70ki" target="_blank" rel="noopener">
+        <span class="ic">移</span>
+        <span class="meta">
+          <span class="nm">中国移动云盘</span>
+          <span class="ds">不限速 · 推荐优先使用</span>
+        </span>
+        <span class="go">去下载</span>
+      </a>
+      <a class="dlrow" href="https://pan.xunlei.com/s/VOjfAF-1eQp0GgVEkeNvvICAA1?pwd=ngqb#" target="_blank" rel="noopener">
+        <span class="ic">迅</span>
+        <span class="meta">
+          <span class="nm">迅雷云盘</span>
+          <span class="ds">备用线路 · 提取码 ngqb</span>
+        </span>
+        <span class="go">去下载</span>
+      </a>
+      <a class="dlrow" href="https://drive.uc.cn/s/516622f4d8074?public=1" target="_blank" rel="noopener">
+        <span class="ic">UC</span>
+        <span class="meta">
+          <span class="nm">UC 网盘</span>
+          <span class="ds">备用线路 · 公开分享</span>
+        </span>
+        <span class="go">去下载</span>
+      </a>
+    </div>
+
+    <div class="note warn">
+      <b>安装提示：</b>三个网盘里都放着两个版本，按下面第 3 节选一个下载即可。
+      安装时如果提示「未知来源」，按系统提示去设置里允许一次就好。
+    </div>
+  </div>
+
+  <!-- ==================== 3 版本怎么选 ==================== -->
+  <div class="card" id="choose">
+    <h2><span class="n">3</span>版本怎么选</h2>
+    <p>两个版本功能一样，区别只在于「怎么把 QQ 藏起来」这一步。</p>
+
+    <div class="two">
+      <div class="vbox hi">
+        <span class="tag">需要提权</span>
+        <h4>免 Root 隐藏 QQ 版本</h4>
+        <p><b>适合：</b>手机上还装着真 QQ，需要在游戏登录时把 QQ 临时藏起来。</p>
+        <p><b>要求：</b>Root 或 Shizuku，二选一，有哪个用哪个。</p>
+        <p><b>特点：</b>真卸载、数据完整保留，恢复时后台静默安装。</p>
+      </div>
+      <div class="vbox">
+        <span class="tag g">零配置</span>
+        <h4>卸载 QQ 使用版本</h4>
+        <p><b>适合：</b>可以把手机上的 QQ 直接卸掉，用本工具顶替 QQ 的位置。</p>
+        <p><b>要求：</b>什么都不用装，不用 Root，不用 Shizuku。</p>
+        <p><b>注意：</b>安装前要先卸载手机上原有的 QQ（包名冲突）。</p>
+      </div>
+    </div>
+
+    <div class="note danger">
+      <b>卸载前务必：</b>如果你选「卸载 QQ 使用版本」，先把手机里原有 QQ 的聊天记录备份好，
+      卸载会清除 QQ 本地数据。选「免 Root 隐藏 QQ 版本」则不需要这一步，它不动你的数据。
+    </div>
+  </div>
+
+  <!-- ==================== 4 Root 教程 ==================== -->
+  <div class="card" id="root">
+    <h2><span class="n">4</span>Root 激活教程</h2>
+    <p>手机已经 Root（装了 Magisk 或 KernelSU）的话，走这条路最简单，配一次永久有效。</p>
+
+    <div class="step">
+      <div class="idx">1</div>
+      <div class="body">
+        <h4>确认 Root 环境正常</h4>
+        <p>打开 Magisk 或 KernelSU，确认首页显示已安装且版本正常。如果显示「未安装」，说明 Root 环境本身有问题，先修好再来。</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="idx">2</div>
+      <div class="body">
+        <h4>给本工具授权 su</h4>
+        <p>打开本工具，点「伪装卸载 QQ」。这时系统会弹出超级用户请求框（Magisk 的授权弹窗），选<b>允许</b>，并勾选「记住选择」，以后就不再问。</p>
+        <p>如果没弹窗，去 Magisk → 超级用户 → 找到本工具 → 手动开启授权。</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="idx">3</div>
+      <div class="body">
+        <h4>确认状态行变绿</h4>
+        <p>回到主页，顶部状态行应该显示绿色的「<b>Root 激活</b>」。看到这个就说明配置好了，可以直接用。</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <b>Root 方式的特点：</b>隐藏走 <code>pm hide</code>，秒完成；恢复走 <code>pm unhide</code>，也是秒完成。
+      全程不碰 <code>/data/data/</code> 下任何文件，聊天记录和登录状态一个字节都不会动。
+      手机重启也不影响，不用重新配置。
+    </div>
+
+    <div class="note warn">
+      <b>如果提示「pm hide 未生效」：</b>说明你的系统（部分 ColorOS / OriginOS / HyperOS）拦截了这条命令。
+      本工具不会用「禁用」来蒙混过关 —— 那样伪装不彻底，设置里还能看到 QQ。这种情况建议改用 Shizuku 方式。
+    </div>
+  </div>
+
+  <!-- ==================== 5 Shizuku 教程 ==================== -->
+  <div class="card" id="shizuku">
+    <h2><span class="n">5</span>Shizuku 激活教程（免 Root）</h2>
+    <p>手机没有 Root 的话，用 Shizuku 借系统权限，效果和 Root 一样。</p>
+
+    <div class="step">
+      <div class="idx">1</div>
+      <div class="body">
+        <h4>安装 Shizuku</h4>
+        <p>在应用商店或粉丝群里搜索「Shizuku」下载安装。它是开源工具，专门给这类软件借系统权限用，本身不带任何其他功能。</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="idx">2</div>
+      <div class="body">
+        <h4>激活 Shizuku</h4>
+        <p><b>安卓 11 及以上（推荐）：</b></p>
+        <p>① 打开系统设置 → 关于手机 → 连续点「版本号」7 次，开启开发者选项</p>
+        <p>② 开发者选项里找到「无线调试」，打开它</p>
+        <p>③ 回到 Shizuku，点「通过无线调试启动」→ 按提示配对（输入配对码）</p>
+        <p style="margin-top:9px"><b>安卓 10 及以下：</b>需要用电脑通过 ADB 命令启动 Shizuku，具体步骤看 Shizuku 首页的说明。</p>
+        <p><b>已有 Root 的机器：</b>直接在 Shizuku 里点「通过 Root 启动」，最快。</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="idx">3</div>
+      <div class="body">
+        <h4>给本工具授权</h4>
+        <p>回到本工具，主页点「去授权」，系统弹窗里选<b>「始终允许」</b>。</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="idx">4</div>
+      <div class="body">
+        <h4>确认状态行变绿</h4>
+        <p>状态行显示绿色的「<b>Shizuku 激活</b>」就配置好了。如果显示「Shizuku·进程通道」，也是正常的，功能一样能用。</p>
+      </div>
+    </div>
+
+    <div class="note warn">
+      <b>Shizuku 会掉线：</b>手机重启后 Shizuku 会停止运行，需要重新打开它（安卓 11 以上通常打开 Shizuku 就自动恢复了）。
+      另外<b>不要清理 Shizuku 的后台</b>，也不要在系统设置里限制它的电池，否则会频繁掉线。
+    </div>
+  </div>
+
+  <!-- ==================== 6 使用方法 ==================== -->
+  <div class="card" id="usage">
+    <h2><span class="n">6</span>日常使用方法</h2>
+
+    <h3>第一次使用</h3>
+    <div class="step">
+      <div class="idx">1</div>
+      <div class="body">
+        <h4>通过口令验证</h4>
+        <p>首次打开会要求输入口令。口令在粉丝群公告里，输入正确即可进入。连续输错 3 次会自动退出。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="idx">2</div>
+      <div class="body">
+        <h4>看完使用教程</h4>
+        <p>首次进入主页会弹一个使用教程，强制阅读 5 秒后可以关闭。以后想再看，点主页最下面的「使用教程」。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="idx">3</div>
+      <div class="body">
+        <h4>给存储权限</h4>
+        <p>抓号需要读写存储权限。安卓 11 以上需要「所有文件访问权限」，按系统提示授权即可。不给的话抓不到号。</p>
+      </div>
+    </div>
+
+    <h3>日常操作流程</h3>
+    <table class="tbl">
+      <tr><th>步骤</th><th>做什么</th></tr>
+      <tr><td>① 选模式</td><td>主页选「上号」「抓号」或「挂机」。三种模式不能同时用，切换即可。</td></tr>
+      <tr><td>② 隐藏 QQ</td><td>点「伪装卸载 QQ」。等提示成功后，QQ 图标会从桌面消失。</td></tr>
+      <tr><td>③ 登录游戏</td><td>打开游戏，点游戏里的 QQ 登录按钮，会调起本工具完成登录。</td></tr>
+      <tr><td>④ 恢复 QQ</td><td>用完点「取消伪装 QQ」，QQ 会自动装回来，数据完整。</td></tr>
+    </table>
+
+    <h3>数据保存在哪</h3>
+    <p>抓到的账号数据保存在：</p>
+    <p><code>/storage/emulated/0/1LICN/数据号/</code></p>
+    <p>按游戏名分文件夹，一个账号一个 txt 文件，编号自动分配。可以直接用文件管理器查看、编辑、备份。</p>
+
+    <h3>遇到问题怎么反馈</h3>
+    <p>主页 → 工具 → <b>导出全部日志</b>。会打包成一个压缩包，把它发到粉丝群，能大幅加快定位速度。</p>
+    <div class="note">
+      日志里<b>不包含</b>你的账号内容（access_token 等敏感信息一个字节都不会打包），只包含运行状态、命令执行记录和错误信息，可以放心发。
+    </div>
+  </div>
+
+  <!-- ==================== 7 粉丝群 ==================== -->
+  <div class="card" id="group">
+    <h2><span class="n">7</span>粉丝群</h2>
+    <p>口令在群公告里，用不上或者遇到问题都进群说。两个群内容一样，进一个就行，都满了再进另一个。</p>
+
+    <a class="qqlink" href="https://qun.qq.com/universal-share/share?ac=1&amp;authKey=Z%2BlSSfzIaKawBM27YmJXPUYd7G63rxVtpHvhCnYADlzoA5uIRvfye1v93DtPgNXG&amp;busi_data=eyJncm91cENvZGUiOiIxMTI3MzM5MTA3IiwidG9rZW4iOiJ1b2lJWkhkdGsxYmVDd0RLWlRSZUJRQzBLYWtVaG0vMXVSbUJ3ZUVPT1hSaWdjaWE5VGZDQ0szeDlUei80N25pIiwidWluIjoiMzY2ODM3NjQ1In0%3D&amp;data=5-N31v_dDEbwEd9MVbFLy_N8QeEf0CNUfSzVmxHA6AA7qUFFqupyOshwmUpC99yvFdhhn-07TXaxnY2VGLIudQ&amp;svctype=4&amp;tempid=h5_group_info" target="_blank" rel="noopener">
+      <span class="qic">1</span>
+      <span class="qm">
+        <span class="qn">禁广 Lc-上号器</span>
+        <span class="qd">主群 · 口令 / 更新 / 反馈</span>
+      </span>
+      <span class="qarrow">›</span>
+    </a>
+
+    <a class="qqlink" href="https://qun.qq.com/universal-share/share?ac=1&amp;authKey=CR%2BIk9WMAvIF1FdnkT8OerRDKZOu8mUbH%2F7nGgqhWRWPSnOtbNAHHVi2mdR4W56b&amp;busi_data=eyJncm91cENvZGUiOiIxMDUxNDc3NTM0IiwidG9rZW4iOiJrQ0xJcVBzUFR2RHo2bGdINDVQek9ZcmpGa2ZBVVQvS3Q0K1NyalNhS09tYTkrUkZwM0oxdWlmU2dVallmYWVIIiwidWluIjoiMzY2ODM3NjQ1In0%3D&amp;data=adIXcRBuYmv6M7c8C9rsS2N0PjkTUUlBsai-RLIxJPuHXKc0tsUASYcTUn-HtDJ886vtU_NRRtFN30SXImmfiQ&amp;svctype=4&amp;tempid=h5_group_info" target="_blank" rel="noopener">
+      <span class="qic">2</span>
+      <span class="qm">
+        <span class="qn">禁广 Lc-上号器2群</span>
+        <span class="qd">备用群 · 主群满了进这个</span>
+      </span>
+      <span class="qarrow">›</span>
+    </a>
+
+    <div class="note">
+      点链接会直接跳到 QQ 加群页，手机上装了 QQ 会自动唤起。<b>群号：</b>主群 1127339107 · 二群 1051477534
+    </div>
+  </div>
+
+  <!-- ==================== 8 常见问题 ==================== -->
+  <div class="card" id="faq">
+    <h2><span class="n">8</span>常见问题</h2>
+
+    <details>
+      <summary>伪装卸载后数据会丢吗？</summary>
+      <p><b>不会。</b>免 Root 方式走的是 <code>pm uninstall -k</code>（保留数据卸载），
+      <code>/data/data/</code> 和 <code>/sdcard/Android/data/</code> 下的数据都完整保留，
+      连应用 uid 都不变。恢复时重新安装同一个包，数据直接就能读到。</p>
+      <p>程序里做了五道保险：备份字节数必须一致、卸载前取不到 uid 就中止、只允许 <code>-k</code> 卸载、
+      卸载后验证数据目录仍在、恢复后比对 uid 与目录属主。任何一步不通过都会中止并提示。</p>
+    </details>
+
+    <details>
+      <summary>提示「免 Root 装不上」怎么办</summary>
+      <p>v224 已修复这个问题。根因是程序读文件大小时读错了数字（读成了 1 字节），
+      导致安装包校验永远失败，只能退回一条被系统 SELinux 拦住的安装路径。</p>
+      <p>如果更新到 v224 还是装不上，会弹出提示框告诉你安装包路径，你可以用文件管理器手动打开安装。
+      记得选「覆盖安装 / 更新」，<b>不要选「卸载后重装」</b>。</p>
+    </details>
+
+    <details>
+      <summary>显示「绑定失败，点重新连接」但功能其实能用</summary>
+      <p>这是 v223 之前的界面显示问题，v224 已修复。后台服务（UserService）绑不上时，
+      程序会自动改走「进程通道」，功能完全正常，但旧版界面会误报失败。</p>
+      <p>v224 会正确显示实际走的通道，看到「Shizuku·进程通道」是正常的，不用去点重连，也不用重启 Shizuku。</p>
+    </details>
+
+    <details>
+      <summary>一直显示「未检测到 Shizuku」</summary>
+      <p>按顺序排查：</p>
+      <p>① Shizuku 是否正在运行（打开 Shizuku 看首页状态）</p>
+      <p>② 手机是否重启过（重启后 Shizuku 会停，需要重新激活）</p>
+      <p>③ 是否清理了 Shizuku 的后台，或限制了它的电池</p>
+      <p>④ 无线调试是否还开着（安卓 11 以上需要保持开发者选项里的无线调试开启）</p>
+    </details>
+
+    <details>
+      <summary>提示「Shizuku 权限被系统限制」</summary>
+      <p>说明 Shizuku 已经激活、授权也给了，但系统把权限卡住了。按两步处理：</p>
+      <p>① 系统设置 → 应用管理 → Shizuku → 电池 → 选「无限制 / 允许后台活动」</p>
+      <p>② 同样把本工具也设为「无限制」，然后重启一次 Shizuku</p>
+      <p>做完回来点「重新连接」即可。</p>
+    </details>
+
+    <details>
+      <summary>伪装卸载时提示「pm hide 未生效」</summary>
+      <p>说明你的系统拦截了 <code>pm hide</code> 命令，部分 ColorOS、OriginOS、HyperOS 会有这个限制。</p>
+      <p>本工具<b>不会</b>用「禁用应用」来代替 —— 那样伪装不彻底，设置的应用管理里还能看到 QQ。
+      建议改用 Shizuku 方式，或者用「卸载 QQ 使用版本」。</p>
+    </details>
+
+    <details>
+      <summary>取不到 QQ 号 / 无法卸载</summary>
+      <p>v224 已修复。原来只走一条命令取应用 uid，取不到就卡住。现在改成四条路径兜底：
+      <code>pm list packages -U</code> → <code>stat</code> 数据目录 → <code>dumpsys package</code> → <code>ls -ld</code> 解析。</p>
+      <p>如果四条都失败，会明确报错而不是卡住。</p>
+    </details>
+
+    <details>
+      <summary>为什么安装包这么小（400 多 KB）</summary>
+      <p>因为代码经过压缩优化，没有多余依赖。包体主要构成：</p>
+      <p>· 代码约 180 KB　· 赞赏二维码约 122 KB（高清图，安卓对图片资源默认不压缩存储）　· 应用图标约 43 KB</p>
+      <p>没加任何后台常驻服务，也不含广告 SDK。</p>
+    </details>
+
+    <details>
+      <summary>能不能同时装两个版本</summary>
+      <p>两个版本包名不同（一个是 <code>com.tencent.tim</code>，一个是 <code>com.tencent.mobileqq</code>），
+      理论上可以共存，但「卸载 QQ 使用版本」会顶替真 QQ 的包名，装它之前必须先卸掉手机上的真 QQ。</p>
+      <p>同一台手机建议只装一个版本，按自己的情况选。</p>
+    </details>
+  </div>
+
+  <!-- ==================== 9 更新日志 ==================== -->
+  <div class="card" id="changelog">
+    <h2><span class="n">9</span>v224 更新日志</h2>
+
+    <h3>重点修复</h3>
+    <ul>
+      <li><b>免 Root 装不上</b> — 程序读错了安装包大小（读成了 1 字节），校验永远不通过，只能退回一条被系统拦住的安装路。之前反复反馈「免 Root 装不上」基本都是它。这个 bug 存在很久了。</li>
+      <li><b>隐藏失败</b> — 判断「是否隐藏成功」的逻辑有漏洞，通道没通时会误报「伪装卸载成功」。现在按真实状态复核，失败就如实说失败，不会再骗你。</li>
+      <li><b>取不到 QQ 号</b> — 取 uid 从一条命令改成四条路径兜底，取不到才报错。</li>
+    </ul>
+
+    <h3>体验优化</h3>
+    <ul>
+      <li><b>速度</b> — 伪装卸载和一键恢复从 3 秒多降到几百毫秒。以前每条命令都要先干等 3 秒才发现走不通再换路。</li>
+      <li><b>界面误导</b> — 后台服务绑不上时界面会显示「绑定失败，点重新连接」，但功能其实正常。现在会显示真实通道。</li>
+      <li><b>防连点</b> — 伪装卸载 / 一键恢复 3 秒内只准点一次，执行期间按钮变灰。以前连点会同时跑好几个线程抢同一份备份，既慢又有写坏备份的风险。</li>
+    </ul>
+
+    <h3>新增功能</h3>
+    <ul>
+      <li><b>使用教程</b> — 主页最下面加了入口，Root 和 Shizuku 两种激活方式分开写，第一次用照着做就行。</li>
+      <li><b>公告系统</b> — 以后有重要通知会直接在软件里弹出来，点任意位置关闭，关掉后 3 天内不再打扰。</li>
+    </ul>
+
+    <h3>实测确认</h3>
+    <p>伪装卸载 + 一键恢复已在小米系统上跑通：真卸载、数据完整保留，恢复时后台静默安装，装完自动退出，全程不用手动点。</p>
+
+    <div class="note">
+      <b>升级方式：</b>直接覆盖安装，不用卸载，聊天记录和登录状态都在。
+    </div>
+  </div>
+
+  <footer>
+    <p>Lc 登录管理工具 · 作者：Lc</p>
+    <p>本工具免费提供，无广告、无会员、无次数限制</p>
+    <p>版权不所有 · 随便传，别卖钱就行</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
