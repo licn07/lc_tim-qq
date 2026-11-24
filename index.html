@@ -563,7 +563,7 @@ footer p:last-child{margin-top:14px;opacity:.72;font-size:12px;letter-spacing:.4
     <h1>Lc 登录管理工具</h1>
     <p class="sub">安卓端账号登录管理工具 · 上号 / 抓号 / 挂机 三合一</p>
     <div class="badges">
-      <span class="badge on">v224 最新版</span>
+      <span class="badge on">v225 最新版</span>
       <span class="badge">Android 8.0+</span>
       <span class="badge">免 Root 可用</span>
       <span class="badge">完全免费</span>
@@ -612,12 +612,12 @@ footer p:last-child{margin-top:14px;opacity:.72;font-size:12px;letter-spacing:.4
     <div class="ver">
       <div>
         <span class="k">当前版本</span>
-        <span class="v">v224</span>
+        <span class="v">v225</span>
       </div>
       <div class="sp"></div>
       <div>
         <span class="k">发布日期</span>
-        <span class="v">2026.11.16</span>
+        <span class="v">2026.11.24</span>
       </div>
       <div class="sp"></div>
       <div>
@@ -868,17 +868,17 @@ footer p:last-child{margin-top:14px;opacity:.72;font-size:12px;letter-spacing:.4
 
     <details>
       <summary>提示「免 Root 装不上」怎么办</summary>
-      <p>v224 已修复这个问题。根因是程序读文件大小时读错了数字（读成了 1 字节），
+      <p>v225 已修复这个问题。根因是程序读文件大小时读错了数字（读成了 1 字节），
       导致安装包校验永远失败，只能退回一条被系统 SELinux 拦住的安装路径。</p>
-      <p>如果更新到 v224 还是装不上，会弹出提示框告诉你安装包路径，你可以用文件管理器手动打开安装。
+      <p>如果更新到 v225 还是装不上，会弹出提示框告诉你安装包路径，你可以用文件管理器手动打开安装。
       记得选「覆盖安装 / 更新」，<b>不要选「卸载后重装」</b>。</p>
     </details>
 
     <details>
       <summary>显示「绑定失败，点重新连接」但功能其实能用</summary>
-      <p>这是 v223 之前的界面显示问题，v224 已修复。后台服务（UserService）绑不上时，
+      <p>这是 v223 之前的界面显示问题，v225 已修复。后台服务（UserService）绑不上时，
       程序会自动改走「进程通道」，功能完全正常，但旧版界面会误报失败。</p>
-      <p>v224 会正确显示实际走的通道，看到「Shizuku·进程通道」是正常的，不用去点重连，也不用重启 Shizuku。</p>
+      <p>v225 会正确显示实际走的通道，看到「Shizuku·进程通道」是正常的，不用去点重连，也不用重启 Shizuku。</p>
     </details>
 
     <details>
@@ -907,7 +907,7 @@ footer p:last-child{margin-top:14px;opacity:.72;font-size:12px;letter-spacing:.4
 
     <details>
       <summary>取不到 QQ 号 / 无法卸载</summary>
-      <p>v224 已修复。原来只走一条命令取应用 uid，取不到就卡住。现在改成四条路径兜底：
+      <p>v225 已修复。原来只走一条命令取应用 uid，取不到就卡住。现在改成四条路径兜底：
       <code>pm list packages -U</code> → <code>stat</code> 数据目录 → <code>dumpsys package</code> → <code>ls -ld</code> 解析。</p>
       <p>如果四条都失败，会明确报错而不是卡住。</p>
     </details>
@@ -929,7 +929,7 @@ footer p:last-child{margin-top:14px;opacity:.72;font-size:12px;letter-spacing:.4
 
   <!-- ==================== 9 更新日志 ==================== -->
   <div class="card" id="changelog">
-    <h2><span class="n">9</span>v224 更新日志</h2>
+    <h2><span class="n">9</span>v225 更新日志</h2>
 
     <h3>重点修复</h3>
     <ul>
@@ -947,8 +947,9 @@ footer p:last-child{margin-top:14px;opacity:.72;font-size:12px;letter-spacing:.4
 
     <h3>新增功能</h3>
     <ul>
-      <li><b>使用教程</b> — 主页最下面加了入口，Root 和 Shizuku 两种激活方式分开写，第一次用照着做就行。</li>
-      <li><b>公告系统</b> — 以后有重要通知会直接在软件里弹出来，点任意位置关闭，关掉后 3 天内不再打扰。</li>
+      <li><b>使用教程</b> — 主页最下面加了入口，Root 和 Shizuku 两种激活方式分开写，第一次用照着做就行。首次进入会强制看完 5 秒，之后随时可以点开复习。</li>
+      <li><b>公告系统</b> — 以后有重要通知会直接在软件里弹出来，点任意位置关闭，关掉后 3 天内不再打扰。多个弹窗会依次平滑出现，不会闪。</li>
+      <li><b>三个下载线路</b> — 更新弹窗里的下载按钮从 2 个增加到 3 个，移动云盘 / 迅雷云盘 / UC 网盘任选，哪个快用哪个。</li>
     </ul>
 
     <h3>实测确认</h3>
